@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Code, Terminal, GitPullRequest } from 'lucide-react';
+import { useState } from "react";
+import { Code, Terminal, Layers, Cpu } from "lucide-react";
 
 export default function CurriculumSection() {
   const [activeModule, setActiveModule] = useState(0);
@@ -8,51 +8,75 @@ export default function CurriculumSection() {
     {
       id: "MODULE 01",
       title: "THE BLUEPRINT",
-      tech: "HTML & CSS",
+      tech: "HTML, CSS & TAILWINDCSS",
       icon: <Code className="w-5 h-5 text-[#B8FF35]" />,
-      description: "Learn how to structure web pages and style them beautifully. You'll build responsive layouts that look flawless on both mobile and desktop screens.",
-      endGoal: "Build a fully responsive personal portfolio site from scratch.",
+      description:
+        "Master semantic structure and responsive styling. Move rapidly from core CSS layouts to rapid UI development using utility-first CSS frameworks and production-ready design practices.",
+      endGoal:
+        "Build and host a premium, responsive personal portfolio site styled completely with TailwindCSS.",
       skills: [
-        "Semantic HTML5",
-        "CSS Flexbox & Grid",
-        "Responsive Design",
-        "Media Queries",
-        "CSS Variables",
-        "Web Typography"
-      ]
+        "Semantic HTML5 Structure",
+        "Flexbox & CSS Grid Mastery",
+        "TailwindCSS Implementation",
+        "Responsive Utility Systems",
+        "Custom Themes & Layouts",
+        "AI-Driven Layout Generation",
+      ],
     },
     {
       id: "MODULE 02",
       title: "THE ENGINE",
-      tech: "JAVASCRIPT",
+      tech: "CORE JAVASCRIPT & GIT",
       icon: <Terminal className="w-5 h-5 text-[#B8FF35]" />,
-      description: "Step into programming logic. Learn how to manipulate the Document Object Model (DOM), work with APIs, and handle interactive user events dynamically.",
-      endGoal: "Build an interactive dynamic Dashboard connected to a weather API.",
+      description:
+        "Step into authentic programming logic. Learn DOM manipulation, integrate real-world APIs, and track your history cleanly using professional local development workflows and version control.",
+      endGoal:
+        "Build an interactive, asynchronous dynamic dashboard tracked via clean Git branching strategies.",
       skills: [
-        "DOM Manipulation",
+        "DOM Tree Manipulation",
         "Asynchronous JS & Fetch API",
-        "Variables, Loops & Conditionals",
-        "Event Observers",
-        "JSON Data Parsing",
-        "ES6+ Features"
-      ]
+        "ES6+ Variables & Closures",
+        "Git Commits & Branch Workflows",
+        "GitHub Team Collaboration",
+        "Prompting AI for Bug Resolution",
+      ],
     },
     {
       id: "MODULE 03",
-      title: "MODERN WORKFLOWS",
-      tech: "GIT & TOOLING",
-      icon: <GitPullRequest className="w-5 h-5 text-[#B8FF35]" />,
-      description: "Learn how engineers write code professionally. Master local development setups, version control with Git & GitHub, and deploying your apps instantly.",
-      endGoal: "Deploy your code live to production with automated CI/CD flows.",
+      title: "THE FRAMEWORK",
+      tech: "REACT & MODERN VITE TOOLING",
+      icon: <Layers className="w-5 h-5 text-[#B8FF35]" />,
+      description:
+        "Transition from manual scripting to building component-driven single-page web applications. Master state rendering, modular design systems, and hyper-fast build environments.",
+      endGoal:
+        "Architect a multi-view application managed with stateful React contexts and lightning-fast local bundlers.",
       skills: [
-        "Git Branching & Commits",
-        "GitHub Collaboration",
-        "Package Management (NPM)",
-        "Vite & Modern Bundlers",
-        "Deployment via Netlify/Vercel",
-        "Debugging Workflows"
-      ]
-    }
+        "React Virtual DOM Dynamics",
+        "Functional Components & Props",
+        "useState & useEffect lifecycles",
+        "Vite Compilation Pipelines",
+        "AI Pair-Programming (Copilot/Cursor)",
+        "Component Architecture Audits",
+      ],
+    },
+    {
+      id: "MODULE 04",
+      title: "PRODUCTION SCALE",
+      tech: "FIREBASE & LIVE DEPLOYMENTS",
+      icon: <Cpu className="w-5 h-5 text-[#B8FF35]" />,
+      description:
+        "Connect your frontends to live cloud architectures. Implement global user authentication, instant persistent storage networks, and continuous integration deployments for global access.",
+      endGoal:
+        "Ship a full-scale web application complete with secure login, cloud databases, and automated live hosting.",
+      skills: [
+        "Firebase User Authentication",
+        "Firestore NoSQL Cloud Database",
+        "Realtime Data Stream Synchronization",
+        "Vercel & Netlify Build Pipelines",
+        "Production Environment Security",
+        "AI Optimization & Code Refactoring",
+      ],
+    },
   ];
 
   return (
@@ -71,28 +95,32 @@ export default function CurriculumSection() {
             03 — CURRICULUM
           </span>
           <h2 className="text-5xl md:text-7xl font-black tracking-tight uppercase leading-[0.95]">
-            FROM BLANK SCREEN <span className="text-[#B8FF35] block">TO PRODUCTION</span>
+            FROM BLANK SCREEN{" "}
+            <span className="text-[#B8FF35] block">TO PRODUCTION</span>
           </h2>
         </div>
 
         {/* Tabbed Interactive Box */}
         <div className="border border-white/10 bg-[#0F0F0F]">
-          
           {/* Module Tabs Header */}
-          <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-b border-white/10">
             {modules.map((mod, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveModule(idx)}
                 className={`p-6 text-left transition-all duration-300 flex flex-col justify-center gap-1 group ${
-                  activeModule === idx 
-                    ? 'bg-[#B8FF35] text-black' 
-                    : 'bg-transparent text-gray-400 hover:text-white border-b md:border-b-0 md:border-r border-white/10'
+                  activeModule === idx
+                    ? "bg-[#B8FF35] text-black"
+                    : "bg-transparent text-gray-400 hover:text-white border-b sm:border-b-0 border-white/10 md:border-r last:border-r-0"
                 }`}
               >
-                <span className={`text-[10px] font-mono font-extrabold tracking-widest ${
-                  activeModule === idx ? 'text-black/60' : 'text-gray-500 group-hover:text-gray-300'
-                }`}>
+                <span
+                  className={`text-[10px] font-mono font-extrabold tracking-widest ${
+                    activeModule === idx
+                      ? "text-black/60"
+                      : "text-gray-500 group-hover:text-gray-300"
+                  }`}
+                >
                   {mod.id}
                 </span>
                 <span className="text-base font-black tracking-tight uppercase">
@@ -144,7 +172,10 @@ export default function CurriculumSection() {
 
               <ul className="space-y-4">
                 {modules[activeModule].skills.map((skill, index) => (
-                  <li key={index} className="flex items-center gap-3 text-sm text-gray-300 group">
+                  <li
+                    key={index}
+                    className="flex items-center gap-3 text-sm text-gray-300 group"
+                  >
                     <span className="text-[#B8FF35] font-mono font-bold select-none group-hover:translate-x-1 transition-transform duration-200">
                       &gt;
                     </span>
@@ -154,7 +185,6 @@ export default function CurriculumSection() {
               </ul>
             </div>
           </div>
-
         </div>
       </div>
     </section>
