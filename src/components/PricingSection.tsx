@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { motion,type Variants } from "framer-motion";
+import { Check, ArrowRight } from "lucide-react";
 
 export default function PricingSection() {
   const features = [
@@ -8,7 +8,7 @@ export default function PricingSection() {
     "Practical AI-Assisted Coding Workflows",
     "Live Portfolio & Web App Projects",
     "Git & GitHub Version Control Workflows",
-    "Flexible Virtual Pacing & Mentorship"
+    "Flexible Virtual Pacing & Mentorship",
   ];
 
   // Animation variants
@@ -23,21 +23,20 @@ export default function PricingSection() {
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: -15 },
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
-      x: 0,
-      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   return (
     <section className="bg-[#0A0A0A] text-white py-24 px-6 border-t border-white/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -49,31 +48,30 @@ export default function PricingSection() {
               04 — INVESTMENT
             </span>
             <h2 className="text-5xl md:text-7xl font-black tracking-tight uppercase leading-[0.95]">
-              SIMPLE, TRANSPARENT <span className="text-[#B8FF35] block">PRICING</span>
+              SIMPLE, TRANSPARENT{" "}
+              <span className="text-[#B8FF35] block">PRICING</span>
             </h2>
           </div>
           <div className="lg:col-span-5 lg:pt-10">
             <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light">
-              An investment in a high-demand, high-income skill designed to pay for 
-              itself with your very first project or client.
+              An investment in a high-demand, high-income skill designed to pay
+              for itself with your very first project or client.
             </p>
           </div>
         </motion.div>
 
         {/* Pricing Card Block */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="max-w-4xl mx-auto border border-white/10 bg-[#0F0F0F] relative overflow-hidden group"
         >
-          
           {/* Top Neon Accent Line */}
           <div className="h-1 w-full bg-[#B8FF35]" />
 
           <div className="p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
             {/* Price Column */}
             <div className="lg:col-span-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 pb-8 lg:pb-0 lg:pr-10">
               <div>
@@ -98,7 +96,7 @@ export default function PricingSection() {
               </div>
 
               {/* Quick Action Button */}
-              <motion.a 
+              <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 href="https://forms.gle/LGco4gL4YC8pnMJi8"
@@ -117,7 +115,7 @@ export default function PricingSection() {
                 WHAT'S INCLUDED:
               </span>
 
-              <motion.ul 
+              <motion.ul
                 variants={listVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -125,7 +123,11 @@ export default function PricingSection() {
                 className="space-y-4"
               >
                 {features.map((feature, index) => (
-                  <motion.li key={index} variants={itemVariants} className="flex items-start gap-3 text-sm text-gray-300">
+                  <motion.li
+                    key={index}
+                    variants={itemVariants}
+                    className="flex items-start gap-3 text-sm text-gray-300"
+                  >
                     <div className="w-5 h-5 rounded-none bg-[#B8FF35]/10 border border-[#B8FF35]/30 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3 h-3 text-[#B8FF35] stroke-[3]" />
                     </div>
@@ -134,7 +136,6 @@ export default function PricingSection() {
                 ))}
               </motion.ul>
             </div>
-
           </div>
 
           {/* Bottom Banner */}
@@ -146,7 +147,6 @@ export default function PricingSection() {
               100% Virtual Access
             </span>
           </div>
-
         </motion.div>
       </div>
     </section>
