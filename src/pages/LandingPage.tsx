@@ -5,6 +5,7 @@ import WhoItsForSection from '../components/WhoItsForSection'
 import CurriculumSection from '../components/CurriculumSection'
 import CTASection from '../components/CTASection'
 import Footer from '../components/Footer'
+import PricingSection from '../components/PricingSection'
 
 const LandingPage = () => {
   return (
@@ -14,6 +15,7 @@ const LandingPage = () => {
       <GatewaySection />
       <WhoItsForSection />
       <CurriculumSection />
+      <PricingSection />
       <CTASection />
       <Footer />
     </div>

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Zap, Globe, GitBranch } from 'lucide-react';
 
 export default function GatewaySection() {
@@ -19,11 +20,39 @@ export default function GatewaySection() {
     }
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className="bg-[#0A0A0A] text-white py-24 px-6 relative">
+    <section className="bg-[#0A0A0A] text-white py-24 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
+        
         {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16"
+        >
           <div className="lg:col-span-7">
             <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#B8FF35] font-mono block mb-4">
               01 — THE GATEWAY
@@ -39,32 +68,46 @@ export default function GatewaySection() {
               perfect gateway — and here is why.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Benefits Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10 bg-[#0F0F0F]">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 border border-white/10 bg-[#0F0F0F]"
+        >
           {cards.map((card, idx) => (
-            <div 
+            <motion.div 
               key={idx} 
-              className={`p-10 flex flex-col justify-between min-h-[280px] hover:bg-white/[0.02] transition-colors duration-300 ${
+              variants={itemVariants}
+              whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.03)" }}
+              className={`p-10 flex flex-col justify-between min-h-[280px] transition-colors duration-300 group ${
                 idx !== cards.length - 1 ? 'border-b md:border-b-0 md:border-r border-white/10' : ''
               }`}
             >
               <div>
-                {/* Icon Container */}
-                <div className="w-10 h-10 border border-white/15 flex items-center justify-center mb-8">
+                {/* Icon Container with slight hover scale */}
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="w-10 h-10 border border-white/15 flex items-center justify-center mb-8 bg-black/40 group-hover:border-[#B8FF35]/40 transition-colors duration-300"
+                >
                   {card.icon}
-                </div>
-                <h3 className="text-xl font-bold tracking-tight uppercase mb-4">
+                </motion.div>
+                
+                <h3 className="text-xl font-bold tracking-tight uppercase mb-4 group-hover:text-[#B8FF35] transition-colors duration-300">
                   {card.title}
                 </h3>
+                
                 <p className="text-gray-500 text-sm leading-relaxed">
                   {card.text}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );

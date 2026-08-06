@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 export default function WhoItsForSection() {
   const cards = [
     {
@@ -26,11 +28,39 @@ export default function WhoItsForSection() {
     }
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className="bg-[#0A0A0A] text-white py-24 px-6 ">
+    <section className="bg-[#0A0A0A] text-white py-24 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
+        
         {/* Header Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16"
+        >
           <div className="lg:col-span-7">
             <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#B8FF35] font-mono block mb-4">
               02 — WHO IT'S FOR
@@ -44,14 +74,23 @@ export default function WhoItsForSection() {
               Whether you're juggling exams, a 9-to-5, or a business — this academy bends to fit your life.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* 2x2 Audience Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           {cards.map((card, idx) => (
-            <div 
+            <motion.div 
               key={idx} 
-              className="relative border border-white/10 bg-[#0F0F0F] p-10 hover:border-white/20 transition-all duration-300 group overflow-hidden"
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="relative border border-white/10 bg-[#0F0F0F] p-10 hover:border-white/20 transition-colors duration-300 group overflow-hidden"
             >
               {/* Corner Folding Accent Element */}
               <div 
@@ -64,15 +103,16 @@ export default function WhoItsForSection() {
               <span className="text-[10px] font-mono font-bold tracking-widest text-[#B8FF35] block mb-2 uppercase">
                 {card.tag}
               </span>
-              <h3 className="text-2xl font-extrabold uppercase mb-4 tracking-tight">
+              <h3 className="text-2xl font-extrabold uppercase mb-4 tracking-tight group-hover:text-[#B8FF35] transition-colors duration-300">
                 {card.title}
               </h3>
               <p className="text-gray-500 text-sm leading-relaxed max-w-lg">
                 <strong className="text-gray-400 font-semibold">The Goal:</strong> {card.text}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );

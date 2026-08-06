@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Code, Terminal, Layers, Cpu } from "lucide-react";
 
 export default function CurriculumSection() {
@@ -80,7 +81,7 @@ export default function CurriculumSection() {
   ];
 
   return (
-    <section className="bg-[#0A0A0A] text-white py-24 px-6 relative flex">
+    <section className="bg-[#0A0A0A] text-white py-24 px-6 relative flex mb-14 overflow-hidden">
       {/* Left side stylized rotated label */}
       <div className="hidden xl:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col items-center select-none opacity-20">
         <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-gray-500 whitespace-nowrap rotate-270 origin-center">
@@ -90,7 +91,13 @@ export default function CurriculumSection() {
 
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
-        <div className="mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16"
+        >
           <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#B8FF35] font-mono block mb-4">
             03 — CURRICULUM
           </span>
@@ -98,17 +105,23 @@ export default function CurriculumSection() {
             FROM BLANK SCREEN{" "}
             <span className="text-[#B8FF35] block">TO PRODUCTION</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Tabbed Interactive Box */}
-        <div className="border border-white/10 bg-[#0F0F0F]">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="border border-white/10 bg-[#0F0F0F]"
+        >
           {/* Module Tabs Header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-b border-white/10">
             {modules.map((mod, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveModule(idx)}
-                className={`p-6 text-left transition-all duration-300 flex flex-col justify-center gap-1 group ${
+                className={`p-6 text-left transition-all duration-300 flex flex-col justify-center gap-1 group relative cursor-pointer ${
                   activeModule === idx
                     ? "bg-[#B8FF35] text-black"
                     : "bg-transparent text-gray-400 hover:text-white border-b sm:border-b-0 border-white/10 md:border-r last:border-r-0"
@@ -131,61 +144,75 @@ export default function CurriculumSection() {
           </div>
 
           {/* Module Tab Content Panel */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[400px]">
-            {/* Left Column: Descriptions & End Goal */}
-            <div className="lg:col-span-7 p-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
-              <div>
-                {/* Badge Indicator */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-white/5 border border-white/10 flex items-center justify-center">
-                    {modules[activeModule].icon}
+          <div className="min-h-[400px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeModule}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="grid grid-cols-1 lg:grid-cols-12"
+              >
+                {/* Left Column: Descriptions & End Goal */}
+                <div className="lg:col-span-7 p-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
+                  <div>
+                    {/* Badge Indicator */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-white/5 border border-white/10 flex items-center justify-center">
+                        {modules[activeModule].icon}
+                      </div>
+                      <span className="text-xs font-mono font-bold tracking-widest text-[#B8FF35] uppercase">
+                        {modules[activeModule].tech}
+                      </span>
+                    </div>
+
+                    <h3 className="text-3xl font-black uppercase tracking-tight mb-4">
+                      {modules[activeModule].title}
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
+                      {modules[activeModule].description}
+                    </p>
                   </div>
-                  <span className="text-xs font-mono font-bold tracking-widest text-[#B8FF35] uppercase">
-                    {modules[activeModule].tech}
-                  </span>
+
+                  {/* End Goal Green Box */}
+                  <div className="mt-8 border border-[#B8FF35]/20 bg-[#B8FF35]/5 p-5 max-w-xl">
+                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#B8FF35] block mb-2">
+                      // END GOAL
+                    </span>
+                    <p className="text-sm font-semibold text-white">
+                      {modules[activeModule].endGoal}
+                    </p>
+                  </div>
                 </div>
 
-                <h3 className="text-3xl font-black uppercase tracking-tight mb-4">
-                  {modules[activeModule].title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
-                  {modules[activeModule].description}
-                </p>
-              </div>
+                {/* Right Column: Skills List */}
+                <div className="lg:col-span-5 p-10 bg-black/20 flex flex-col justify-start">
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase block mb-8">
+                    SKILLS YOU'LL BUILD
+                  </span>
 
-              {/* End Goal Green Box */}
-              <div className="mt-8 border border-[#B8FF35]/20 bg-[#B8FF35]/5 p-5 max-w-xl">
-                <span className="text-[10px] font-mono font-bold tracking-widest text-[#B8FF35] block mb-2">
-                  // END GOAL
-                </span>
-                <p className="text-sm font-semibold text-white">
-                  {modules[activeModule].endGoal}
-                </p>
-              </div>
-            </div>
-
-            {/* Right Column: Skills List */}
-            <div className="lg:col-span-5 p-10 bg-black/20 flex flex-col justify-start">
-              <span className="text-[10px] font-mono font-bold tracking-widest text-gray-500 uppercase block mb-8">
-                SKILLS YOU'LL BUILD
-              </span>
-
-              <ul className="space-y-4">
-                {modules[activeModule].skills.map((skill, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center gap-3 text-sm text-gray-300 group"
-                  >
-                    <span className="text-[#B8FF35] font-mono font-bold select-none group-hover:translate-x-1 transition-transform duration-200">
-                      &gt;
-                    </span>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  <ul className="space-y-4">
+                    {modules[activeModule].skills.map((skill, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.25, delay: index * 0.05 }}
+                        className="flex items-center gap-3 text-sm text-gray-300 group"
+                      >
+                        <span className="text-[#B8FF35] font-mono font-bold select-none group-hover:translate-x-1 transition-transform duration-200">
+                          &gt;
+                        </span>
+                        {skill}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
