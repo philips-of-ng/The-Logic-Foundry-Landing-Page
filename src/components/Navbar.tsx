@@ -7,10 +7,10 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-white/[0.03] bg-[#0A0A0A]/40 backdrop-blur-md transition-all duration-300">
-      <div className="w-full max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div className="w-full max-w-7xl mx-auto px-30 py-30 flex justify-between items-center">
         {/* Brand Logo */}
-        <div className="font-extrabold text-xl tracking-wider font-mono text-white">
-          THE LOGIC FOUNDRY <span className="text-[#B8FF35]">2.0</span>
+        <div className="font-extrabold text-xl tracking-wider text-center font-mono text-white">
+          THE LOGIC <br /> FOUNDRY <span className="text-[#B8FF35]">2.0</span>
         </div>
         
         {/* Call to Action Button */}
